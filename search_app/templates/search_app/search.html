@@ -62,7 +62,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">My Component </a>
+        <a class="navbar-brand" href="#">MySite</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -94,11 +94,23 @@
         </div>
     </div>
 
-    <!-- Custom JS for Autocomplete -->
+    <!-- Custom JS for Autocomplete and Validation -->
     <script>
         $(document).ready(function() {
+            // Validate input
+            function validateInput(input) {
+                // Remove special characters and restrict to two spaces
+                input = input.replace(/[^a-zA-Z0-9\s]/g, ''); // Allow only alphanumeric characters and spaces
+                // Replace multiple spaces with a single space
+                input = input.replace(/\s{2,}/g, ' '); 
+                return input;
+            }
+
             $('#autocomplete').on('input', function() {
                 var term = $(this).val();
+                term = validateInput(term);
+                $(this).val(term);
+
                 if (term.length > 0) {
                     $.ajax({
                         url: "{% url 'autocomplete' %}",
