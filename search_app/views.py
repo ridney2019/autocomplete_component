@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from search_app.models import Item
+from search_app.models import Artist
 from django.shortcuts import render
 
 def search(request):
@@ -7,7 +7,7 @@ def search(request):
 
 def autocomplete(request):
     if 'term' in request.GET:
-        qs = Item.objects.filter(name__icontains=request.GET.get('term'))
+        qs = Artist.objects.filter(name__icontains=request.GET.get('term'))
         names = list(qs.values_list('name', flat=True))
         return JsonResponse(names, safe=False)
     return JsonResponse([], safe=False)
