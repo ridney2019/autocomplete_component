@@ -12,7 +12,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">My Component</a>
+        <a class="navbar-brand" href="#">Welcome to the Music Search App</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,27 +22,21 @@
                     <a class="nav-link" href="{% url 'search' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Recent Searches</a>
-                </li>
             </ul>
         </div>
     </nav>
     <div class="container">
-        <h1 class="text-center mb-4">Search</h1>
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="search-box position-relative">
-                    <input type="text" id="autocomplete" class="form-control" placeholder="Search...">
+    <h1 class="text-center mb-4">Search</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="search-box position-relative">
+                    <input type="text" id="autocomplete" class="form-control" name="term" placeholder="Search for an artist..">
                     <i class="fas fa-search position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
-                    {% comment %} <form method="get">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                    </form> {% endcomment %}
-                    <div id="suggestions" class="autocomplete-suggestions"></div>
-                </div>
+                <div id="suggestions" class="autocomplete-suggestions"></div>
             </div>
         </div>
     </div>
+</div>
     
     <script>
         $(document).ready(function() {
