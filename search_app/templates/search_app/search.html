@@ -4,63 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autocomplete Search</title>
-    <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %} ">
-
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {% comment %} <script src="{% static 'validation.js' %}"></script> {% endcomment %}
-    
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">MySite</a>
+        <a class="navbar-brand" href="#">My Component</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="{% url 'search' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="#">Recent Searches</a>
                 </li>
             </ul>
         </div>
     </nav>
-
-    <!-- Main Container -->
     <div class="container">
         <h1 class="text-center mb-4">Search</h1>
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <div class="search-box">
+                <div class="search-box position-relative">
                     <input type="text" id="autocomplete" class="form-control" placeholder="Search...">
+                    <i class="fas fa-search position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                    {% comment %} <form method="get">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </form> {% endcomment %}
                     <div id="suggestions" class="autocomplete-suggestions"></div>
                 </div>
             </div>
         </div>
     </div>
+    
     <script>
         $(document).ready(function() {
-            // Validate input
             function validateInput(input) {
-                // Remove special characters and restrict to two spaces
-                input = input.replace(/[^a-zA-Z0-9\s]/g, ''); // Allow only alphanumeric characters and spaces
-                // Replace multiple spaces with a single space
+                input = input.replace(/[^a-zA-Z0-9\s]/g, ''); 
                 input = input.replace(/\s{2,}/g, ' '); 
                 return input;
             }
